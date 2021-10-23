@@ -1,9 +1,9 @@
 # msfs-h145-continuous-activator
-Run this Python script to have the HPG Airbus H145 activated without needing to manually run ActivatorApp.exe every 2 hours.
+Run this Python script to have the HPG Airbus H145 activated without needing to launch and then restart MSFS.
 
 In the event where you get the activation annunciator, hit ALT+S (Toggle alternate static) to force H145 to read the license file.
 
-You do not need to provide the activation key to this application - it will read it from the activation directory. As such, you **must** have used the ActivatorApp.exe (successfully) at least once (the file `hpg-airbus-h145/HPGH145/keycode.txt` already exists).
+You do not need to provide the activation/license key to this application - it will read it from the activation directory. As such, you **must** have already saved your license key to the file `hpg-airbus-h145/HPGH145/KeyCode.txt`.
 
 ## Quickstart
 
@@ -22,11 +22,10 @@ You do not need to provide the activation key to this application - it will read
 
 - ### H145 activation directory: "&lt;UNKNOWN&gt;"
 
-`python [path to this directory]/h145.py --package [path to H145 directory (with ActivatorApp.exe)]`
+`python [path to this directory]/h145.py --package [path to H145 directory (with manifest.json)]`
 
 - ### Activation annunciator does not go away
 
 Please make sure this is your first flight after launching MSFS.
+
 Under certain conditions, the Early Release H145 will not read the license file - activation via ActivatorApp.exe will not work, Toggle alternate static (simconnect or hotkey) will also do nothing. The only resolution is to restart MSFS.
-
-

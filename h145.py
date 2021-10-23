@@ -7,6 +7,7 @@ import time
 from argparse import ArgumentParser
 from base64 import standard_b64decode
 from datetime import datetime
+from json import JSONDecodeError
 
 from requests import Session
 from requests.exceptions import RequestException, Timeout
@@ -38,7 +39,8 @@ def _main() -> None:
                 if not line.startswith('InstalledPackagesPath'):
                     continue
                 path_start = line.find('"') + 1
-                activation_dir = os.path.join(line[path_start:line.rfind('"')], 'hpg-airbus-h145', 'HPGH145')
+                activation_dir = os.path.join(line[path_start:line.rfind('"')], 'Community', 'hpg-airbus-h145',
+                                              'HPGH145')
     else:
         activation_dir = os.path.join(cmd_args.package, 'HPGH145')
 
@@ -57,9 +59,9 @@ def _main() -> None:
         sys.exit(1)
     try:
         with open(os.path.join(activation_dir, 'license.txt'), 'rt', encoding='us-ascii') as license_file:
-            current_expiry = _get_expiry((license_file.read()))
+            current_expiry = _get_expiry(license_file.read())
         print('H145 activation expires on {} (local time)'.format(_format_expiry(current_expiry)))
-    except FileNotFoundError:
+    except (FileNotFoundError, JSONDecodeError):
         print('H145 activation expiry unknown')
 
     with Session() as session:
